@@ -5,11 +5,12 @@ import br.com.xavero.projetofinal.dtos.user.UserRequestUpdateDto;
 import br.com.xavero.projetofinal.dtos.user.UserResponseDto;
 import br.com.xavero.projetofinal.domain.User;
 import br.com.xavero.projetofinal.mappers.user.UserMapper;
-import br.com.xavero.projetofinal.services.user.utils.UserService;
 import br.com.xavero.projetofinal.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,25 +22,31 @@ public class UserServiceImpl implements UserService {
     private final UserRepository repository;
 
     @Override
-    public User insertUser(UserRequestDto dto) {
+    public String insert(UserRequestDto dto) {
         String email = dto.userData().email();
         LOG.info("Inserting user in db {}", email);
         var user = userMapper.toUserDomain(dto);
-        return repository.save(user);
+        return repository.save(user).getEmail();
     }
 
     @Override
-    public UserResponseDto findUser(String email) {
+    public UserResponseDto find(String email) {
         LOG.info("Finding user in db {}", email);
         return userMapper.toResponseDto(findUserByEmail(email));
     }
 
     @Override
-    public void updateUser(UserRequestUpdateDto dto) {
+    public void update(UserRequestUpdateDto dto) {
         String email = dto.userData().email();
         LOG.info("Finding user in db {}", email);
         updateUser(findUserByEmail(email), dto);
         LOG.info("Updated successfully {}", email);
+    }
+
+    @Override
+    public Page<UserResponseDto> findAll(Pageable pageable) {
+        return repository.findAll(pageable)
+                .map(userMapper::toResponseDto);
     }
 
     private User updateUser(User user, UserRequestUpdateDto dto) {
@@ -50,7 +57,9 @@ public class UserServiceImpl implements UserService {
     }
 
     private User findUserByEmail(String email) {
-        return repository.findUserByEmail(email)
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        return repository.findUserByEmail(email).orElseThrow(() -> {
+            LOG.error("User not found {}", email);
+            return new IllegalArgumentException("User not found");
+        });
     }
 }
