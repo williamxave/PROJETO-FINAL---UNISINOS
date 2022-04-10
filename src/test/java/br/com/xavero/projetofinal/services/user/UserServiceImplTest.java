@@ -1,10 +1,10 @@
 package br.com.xavero.projetofinal.services.user;
 
+import br.com.xavero.projetofinal.domain.User;
 import br.com.xavero.projetofinal.dtos.user.UserData;
 import br.com.xavero.projetofinal.dtos.user.UserRequestDto;
 import br.com.xavero.projetofinal.dtos.user.UserRequestUpdateDto;
 import br.com.xavero.projetofinal.dtos.user.UserResponseDto;
-import br.com.xavero.projetofinal.domain.User;
 import br.com.xavero.projetofinal.mappers.user.UserMapper;
 import br.com.xavero.projetofinal.repositories.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,6 +14,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoSettings;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.Optional;
 
@@ -32,6 +35,9 @@ class UserServiceImplTest {
 
     @Mock
     private UserMapper userMapper;
+
+    @Autowired
+    private Pageable pageable;
 
     private User user;
     private UserData data;
@@ -55,10 +61,10 @@ class UserServiceImplTest {
 
         when(userMapper.toUserDomain(requestDto)).thenReturn(user);
         when(userRepository.save(user)).thenReturn(user);
-        User userResponse = userService.insertUser(requestDto);
+        userService.insert(requestDto);
 
-        assertNotNull(userResponse);
         Mockito.verify(userRepository, Mockito.atLeastOnce()).save(user);
+        Mockito.verify(userMapper, Mockito.atLeastOnce()).toUserDomain(requestDto);
 
     }
 
@@ -68,7 +74,7 @@ class UserServiceImplTest {
 
         when(userMapper.toResponseDto(user)).thenReturn(responseDto);
         when(userRepository.findUserByEmail(data.email())).thenReturn(Optional.of(user));
-        UserResponseDto a = userService.findUser(data.email());
+        UserResponseDto a = userService.find(data.email());
 
         assertNotNull(a);
         Mockito.verify(userRepository, Mockito.atLeastOnce()).findUserByEmail(data.email());
@@ -81,7 +87,7 @@ class UserServiceImplTest {
         when(userRepository.findUserByEmail(EMAIL)).thenThrow(new IllegalArgumentException("User not found"));
 
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
-            userService.findUser(EMAIL);
+            userService.find(EMAIL);
         });
         Mockito.verify(userRepository, Mockito.atLeastOnce()).findUserByEmail(EMAIL);
         assertEquals("User not found", ex.getMessage());
@@ -93,7 +99,7 @@ class UserServiceImplTest {
 
         when(userRepository.findUserByEmail(data.email())).thenReturn(Optional.of(user));
         when(userRepository.save(user)).thenReturn(user);
-        userService.updateUser(updateDto);
+        userService.update(updateDto);
 
         Mockito.verify(userRepository, Mockito.atLeastOnce()).save(user);
         Mockito.verify(userRepository, Mockito.atLeastOnce()).findUserByEmail(data.email());
@@ -107,9 +113,21 @@ class UserServiceImplTest {
         when(userRepository.findUserByEmail(data.email())).thenThrow(new IllegalArgumentException("User not found"));
 
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
-            userService.updateUser(updateDto);
+            userService.update(updateDto);
         });
         Mockito.verify(userRepository, Mockito.atLeastOnce()).findUserByEmail(data.email());
         assertEquals("User not found", ex.getMessage());
+    }
+
+    @Test
+    @DisplayName("Should find all user ")
+    void shouldFindAllUser() {
+        Page<User> page = Page.empty();
+
+        when(userRepository.findAll(pageable)).thenReturn(page);
+        Page<UserResponseDto> responseDtos = userService.findAll(pageable);
+
+        assertNotNull(responseDtos);
+        Mockito.verify(userRepository, Mockito.atLeastOnce()).findAll(pageable);
     }
 }
