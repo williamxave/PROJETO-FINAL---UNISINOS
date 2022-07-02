@@ -1,10 +1,12 @@
 package br.com.xavero.projetofinal.services.day;
 
+import br.com.xavero.projetofinal.controllers.day.dto.DayRequestDomain;
+import br.com.xavero.projetofinal.controllers.day.dto.DayResponseDto;
+import br.com.xavero.projetofinal.controllers.day.mapper.DayMapper;
 import br.com.xavero.projetofinal.domain.Day;
-import br.com.xavero.projetofinal.dtos.day.DayRequestDto;
-import br.com.xavero.projetofinal.dtos.day.DayResponseDto;
-import br.com.xavero.projetofinal.mappers.day.DayMapper;
 import br.com.xavero.projetofinal.repositories.day.DayRepository;
+import br.com.xavero.projetofinal.repositories.day.dto.DayRequestEntity;
+import br.com.xavero.projetofinal.services.day.dto.DayResponseDomain;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -45,17 +47,20 @@ class DayServiceImplTest {
     @Test
     @DisplayName("Should register day")
     void shouldRegisterDay() {
-        var dto = new DayRequestDto(DATE);
+        var requestDomain = new DayRequestDomain(DATE);
+
+        var requestEntity = new DayRequestEntity(LocalDate.now());
+
         var day = new Day();
         day.setExternalId(EXTERNAL_ID);
 
-        when(mapper.toDomain(dto)).thenReturn(day);
+        when(mapper.toRequestEntity(requestDomain)).thenReturn(requestEntity);
         when(repository.save(day)).thenReturn(day);
-        var externalId = dayService.insert(dto);
+        var externalId = dayService.insert(requestDomain);
 
         assertNotNull(externalId);
         assertEquals(EXTERNAL_ID, UUID.fromString(externalId));
-        verify(mapper, Mockito.atLeastOnce()).toDomain(dto);
+        verify(mapper, Mockito.atLeastOnce()).toRequestEntity(requestDomain);
         verify(repository, Mockito.atLeastOnce()).save(day);
 
     }
@@ -96,9 +101,9 @@ class DayServiceImplTest {
         Page<Day> page = Page.empty();
 
         when(repository.findAll(pageable)).thenReturn(page);
-        Page<DayResponseDto> dayResponseDto = dayService.findAll(pageable);
+        Page<DayResponseDomain> responseDomains = dayService.findAll(pageable);
 
-        assertNotNull(dayResponseDto);
+        assertNotNull(responseDomains);
         Mockito.verify(repository, Mockito.atLeastOnce()).findAll(pageable);
     }
 }

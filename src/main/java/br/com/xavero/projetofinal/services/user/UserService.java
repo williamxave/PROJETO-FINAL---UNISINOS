@@ -1,8 +1,8 @@
 package br.com.xavero.projetofinal.services.user;
 
-import br.com.xavero.projetofinal.dtos.user.UserRequestDto;
-import br.com.xavero.projetofinal.dtos.user.UserRequestUpdateDto;
-import br.com.xavero.projetofinal.dtos.user.UserResponseDto;
+import br.com.xavero.projetofinal.controllers.user.dto.UserRequestDto;
+import br.com.xavero.projetofinal.controllers.user.dto.UserRequestUpdateDto;
+import br.com.xavero.projetofinal.controllers.user.dto.UserResponseDto;
 import br.com.xavero.projetofinal.utils.GenericInterfaceService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

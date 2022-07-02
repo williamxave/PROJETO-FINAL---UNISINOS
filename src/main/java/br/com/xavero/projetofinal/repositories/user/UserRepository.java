@@ -1,4 +1,4 @@
-package br.com.xavero.projetofinal.repositories;
+package br.com.xavero.projetofinal.repositories.user;
 
 import br.com.xavero.projetofinal.domain.User;
 import org.springframework.data.domain.Page;

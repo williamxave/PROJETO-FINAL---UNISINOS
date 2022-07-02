@@ -1,24 +1,24 @@
 package br.com.xavero.projetofinal.services.day;
 
-import br.com.xavero.projetofinal.dtos.day.DayRequestDto;
-import br.com.xavero.projetofinal.dtos.day.DayResponseDto;
-import br.com.xavero.projetofinal.dtos.day.DayUpdateDto;
+import br.com.xavero.projetofinal.controllers.day.dto.DayRequestDomain;
+import br.com.xavero.projetofinal.controllers.day.dto.DayUpdateDto;
+import br.com.xavero.projetofinal.services.day.dto.DayResponseDomain;
 import br.com.xavero.projetofinal.utils.GenericInterfaceService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface DayService extends GenericInterfaceService<DayRequestDto, DayResponseDto, DayUpdateDto> {
+public interface DayService extends GenericInterfaceService<DayRequestDomain, DayResponseDomain, DayUpdateDto> {
 
     @Override
-    String insert(DayRequestDto dto);
+    String insert(DayRequestDomain domain);
 
     @Override
-    DayResponseDto find(String string);
+    DayResponseDomain find(String externalId);
 
     @Override
     void update(DayUpdateDto dto);
 
     @Override
-    Page<DayResponseDto> findAll(Pageable pageable);
+    Page<DayResponseDomain> findAll(Pageable pageable);
 
 }

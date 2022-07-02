@@ -1,11 +1,12 @@
 package br.com.xavero.projetofinal.services.day;
 
+import br.com.xavero.projetofinal.controllers.day.dto.DayRequestDomain;
+import br.com.xavero.projetofinal.controllers.day.dto.DayUpdateDto;
+import br.com.xavero.projetofinal.controllers.day.mapper.DayMapper;
 import br.com.xavero.projetofinal.domain.Day;
-import br.com.xavero.projetofinal.dtos.day.DayRequestDto;
-import br.com.xavero.projetofinal.dtos.day.DayResponseDto;
-import br.com.xavero.projetofinal.dtos.day.DayUpdateDto;
-import br.com.xavero.projetofinal.mappers.day.DayMapper;
 import br.com.xavero.projetofinal.repositories.day.DayRepository;
+import br.com.xavero.projetofinal.repositories.day.DayRepositoryImpl;
+import br.com.xavero.projetofinal.services.day.dto.DayResponseDomain;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,22 +27,23 @@ public class DayServiceImpl implements DayService {
     @Value("${pattern.date}")
     private String pattern;
 
-    private final DayRepository repository;
+    private final DayRepositoryImpl dayRepository;
     private final DayMapper mapper;
 
     @Override
-    public String insert(DayRequestDto dto) {
-        var date = dto.date();
+    public String insert(DayRequestDomain domain) {
+        var date = domain.date();
         LOG.info("Inserting day in db {}", date);
-        var day = mapper.toDomain(dto);
-        var response = repository.save(day);
-        return response.getExternalId().toString();
+        return dayRepository.save(mapper.toRequestEntity(domain));
+
     }
 
     @Override
-    public DayResponseDto find(String externalId) {
-        LOG.info("Finding day in db {}", externalId);
-        return mapper.toDto(findDayByExternalId(externalId));
+    public DayResponseDomain find(String externalId) {
+//        LOG.info("Finding day in db {}", externalId);
+//        return mapper.toDto(findDayByExternalId(externalId));
+        return mapper.toResponseDomain(dayRepository.findDay(externalId));
+
     }
 
     @Override
@@ -50,21 +52,19 @@ public class DayServiceImpl implements DayService {
     }
 
     @Override
-    public Page<DayResponseDto> findAll(Pageable pageable) {
-        LOG.info("Finding all days in db");
-        return repository.findAll(pageable)
-                .map(mapper::toDto);
+    public Page<DayResponseDomain> findAll(Pageable pageable) {
+        return dayRepository.findAllDay(pageable).map(mapper::toResponseDomain);
     }
-
-    private LocalDate dateParse(String date) {
-        var formatter = DateTimeFormatter.ofPattern(pattern);
-        return LocalDate.parse(date, formatter);
-    }
-
-    private Day findDayByExternalId(String externalId) {
-        return repository.findDayByExternalId(UUID.fromString(externalId)).orElseThrow(() -> {
-            LOG.error("Day not found {}", externalId);
-            return new IllegalArgumentException("Day not found");
-        });
-    }
+//
+//    private LocalDate dateParse(String date) {
+//        var formatter = DateTimeFormatter.ofPattern(pattern);
+//        return LocalDate.parse(date, formatter);
+//    }
+//
+//    private Day findDayByExternalId(String externalId) {
+//        return repository.findDayByExternalId(UUID.fromString(externalId)).orElseThrow(() -> {
+//            LOG.error("Day not found {}", externalId);
+//            return new IllegalArgumentException("Day not found");
+//        });
+//    }
 }

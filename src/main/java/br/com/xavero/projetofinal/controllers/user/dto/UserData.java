@@ -1,4 +1,4 @@
-package br.com.xavero.projetofinal.dtos.user;
+package br.com.xavero.projetofinal.controllers.user.dto;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
