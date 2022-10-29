@@ -1,4 +1,4 @@
-package br.com.xavero.projetofinal.controllers.day.dto;
+package br.com.xavero.projetofinal.controllers.day.dto.request;
 
 import br.com.xavero.projetofinal.utils.RequestDto;
 

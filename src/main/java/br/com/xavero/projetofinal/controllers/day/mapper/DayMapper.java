@@ -1,12 +1,12 @@
 package br.com.xavero.projetofinal.controllers.day.mapper;
 
-import br.com.xavero.projetofinal.controllers.day.dto.DayRequestDomain;
-import br.com.xavero.projetofinal.controllers.day.dto.DayRequestDto;
-import br.com.xavero.projetofinal.controllers.day.dto.DayResponseDto;
+import br.com.xavero.projetofinal.controllers.day.dto.request.DayRequestDomain;
+import br.com.xavero.projetofinal.controllers.day.dto.request.DayRequestDto;
+import br.com.xavero.projetofinal.controllers.day.dto.response.DayResponseDto;
 import br.com.xavero.projetofinal.domain.Day;
-import br.com.xavero.projetofinal.repositories.day.dto.DayRequestEntity;
-import br.com.xavero.projetofinal.repositories.day.dto.DayResponseEntity;
-import br.com.xavero.projetofinal.services.day.dto.DayResponseDomain;
+import br.com.xavero.projetofinal.repositories.day.entity.request.DayRequestEntity;
+import br.com.xavero.projetofinal.repositories.day.entity.response.DayResponseEntity;
+import br.com.xavero.projetofinal.services.day.domain.response.DayResponseDomain;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;

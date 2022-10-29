@@ -1,4 +1,4 @@
-package br.com.xavero.projetofinal.repositories.day.dto;
+package br.com.xavero.projetofinal.repositories.day.entity.request;
 
 import java.time.LocalDate;
 

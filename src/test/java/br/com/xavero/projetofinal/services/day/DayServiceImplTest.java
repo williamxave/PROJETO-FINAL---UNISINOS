@@ -1,12 +1,12 @@
 package br.com.xavero.projetofinal.services.day;
 
-import br.com.xavero.projetofinal.controllers.day.dto.DayRequestDomain;
-import br.com.xavero.projetofinal.controllers.day.dto.DayResponseDto;
+import br.com.xavero.projetofinal.controllers.day.dto.request.DayRequestDomain;
+import br.com.xavero.projetofinal.controllers.day.dto.response.DayResponseDto;
 import br.com.xavero.projetofinal.controllers.day.mapper.DayMapper;
 import br.com.xavero.projetofinal.domain.Day;
 import br.com.xavero.projetofinal.repositories.day.DayRepository;
-import br.com.xavero.projetofinal.repositories.day.dto.DayRequestEntity;
-import br.com.xavero.projetofinal.services.day.dto.DayResponseDomain;
+import br.com.xavero.projetofinal.repositories.day.entity.request.DayRequestEntity;
+import br.com.xavero.projetofinal.services.day.domain.response.DayResponseDomain;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

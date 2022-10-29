@@ -2,9 +2,9 @@ package br.com.xavero.projetofinal.services.user;
 
 import br.com.xavero.projetofinal.domain.User;
 import br.com.xavero.projetofinal.controllers.user.dto.UserData;
-import br.com.xavero.projetofinal.controllers.user.dto.UserRequestDto;
-import br.com.xavero.projetofinal.controllers.user.dto.UserRequestUpdateDto;
-import br.com.xavero.projetofinal.controllers.user.dto.UserResponseDto;
+import br.com.xavero.projetofinal.controllers.user.dto.request.UserRequestDto;
+import br.com.xavero.projetofinal.controllers.user.dto.request.UserRequestUpdateDto;
+import br.com.xavero.projetofinal.controllers.user.dto.response.UserResponseDto;
 import br.com.xavero.projetofinal.controllers.user.mapper.UserMapper;
 import br.com.xavero.projetofinal.repositories.user.UserRepository;
 import org.junit.jupiter.api.BeforeEach;

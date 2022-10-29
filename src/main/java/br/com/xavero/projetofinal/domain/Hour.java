@@ -1,6 +1,6 @@
 package br.com.xavero.projetofinal.domain;
 
-import br.com.xavero.projetofinal.enuns.PossibleHour;
+import br.com.xavero.projetofinal.enums.PossibleHourEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,6 +23,6 @@ public class Hour {
 
     private LocalDateTime rented;
 
-    private PossibleHour possibleHour;
+    private PossibleHourEnum possibleHourEnum;
 
 }

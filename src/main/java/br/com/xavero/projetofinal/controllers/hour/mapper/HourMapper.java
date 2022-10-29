@@ -1,8 +1,7 @@
 package br.com.xavero.projetofinal.controllers.hour.mapper;
 
 import br.com.xavero.projetofinal.domain.Hour;
-import br.com.xavero.projetofinal.controllers.hour.dto.HourRequestDto;
-import br.com.xavero.projetofinal.controllers.hour.dto.HourResponseDto;
+import br.com.xavero.projetofinal.controllers.hour.dto.response.HourResponseDto;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

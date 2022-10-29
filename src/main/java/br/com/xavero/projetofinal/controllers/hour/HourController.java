@@ -1,7 +1,7 @@
 package br.com.xavero.projetofinal.controllers.hour;
 
-import br.com.xavero.projetofinal.controllers.hour.dto.HourRequestDto;
-import br.com.xavero.projetofinal.controllers.hour.dto.HourResponseDto;
+import br.com.xavero.projetofinal.controllers.hour.dto.request.HourRequestDto;
+import br.com.xavero.projetofinal.controllers.hour.dto.response.HourResponseDto;
 import br.com.xavero.projetofinal.services.hour.HourService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

@@ -1,5 +1,6 @@
-package br.com.xavero.projetofinal.controllers.user.dto;
+package br.com.xavero.projetofinal.controllers.user.dto.request;
 
+import br.com.xavero.projetofinal.controllers.user.dto.UserData;
 import br.com.xavero.projetofinal.utils.RequestDto;
 
 import javax.validation.constraints.NotBlank;

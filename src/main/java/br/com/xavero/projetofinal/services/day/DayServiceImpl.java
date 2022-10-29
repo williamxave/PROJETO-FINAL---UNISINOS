@@ -1,12 +1,10 @@
 package br.com.xavero.projetofinal.services.day;
 
-import br.com.xavero.projetofinal.controllers.day.dto.DayRequestDomain;
+import br.com.xavero.projetofinal.controllers.day.dto.request.DayRequestDomain;
 import br.com.xavero.projetofinal.controllers.day.dto.DayUpdateDto;
 import br.com.xavero.projetofinal.controllers.day.mapper.DayMapper;
-import br.com.xavero.projetofinal.domain.Day;
-import br.com.xavero.projetofinal.repositories.day.DayRepository;
 import br.com.xavero.projetofinal.repositories.day.DayRepositoryImpl;
-import br.com.xavero.projetofinal.services.day.dto.DayResponseDomain;
+import br.com.xavero.projetofinal.services.day.domain.response.DayResponseDomain;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,10 +12,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor

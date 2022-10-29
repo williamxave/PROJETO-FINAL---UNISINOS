@@ -1,4 +1,4 @@
-package br.com.xavero.projetofinal.services.day.dto;
+package br.com.xavero.projetofinal.services.day.domain.response;
 
 import br.com.xavero.projetofinal.utils.ResponseDto;
 

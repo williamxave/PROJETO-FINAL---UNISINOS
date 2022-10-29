@@ -1,7 +1,7 @@
 package br.com.xavero.projetofinal.controllers.user.mapper;
 
-import br.com.xavero.projetofinal.controllers.user.dto.UserRequestDto;
-import br.com.xavero.projetofinal.controllers.user.dto.UserResponseDto;
+import br.com.xavero.projetofinal.controllers.user.dto.request.UserRequestDto;
+import br.com.xavero.projetofinal.controllers.user.dto.response.UserResponseDto;
 import br.com.xavero.projetofinal.domain.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

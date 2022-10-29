@@ -1,7 +1,7 @@
 package br.com.xavero.projetofinal.controllers.day;
 
-import br.com.xavero.projetofinal.controllers.day.dto.DayRequestDto;
-import br.com.xavero.projetofinal.controllers.day.dto.DayResponseDto;
+import br.com.xavero.projetofinal.controllers.day.dto.request.DayRequestDto;
+import br.com.xavero.projetofinal.controllers.day.dto.response.DayResponseDto;
 import br.com.xavero.projetofinal.controllers.day.mapper.DayMapper;
 import br.com.xavero.projetofinal.services.day.DayService;
 import lombok.RequiredArgsConstructor;

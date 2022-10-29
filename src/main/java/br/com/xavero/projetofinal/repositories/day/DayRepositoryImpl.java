@@ -1,8 +1,8 @@
 package br.com.xavero.projetofinal.repositories.day;
 
 import br.com.xavero.projetofinal.controllers.day.mapper.DayMapper;
-import br.com.xavero.projetofinal.repositories.day.dto.DayRequestEntity;
-import br.com.xavero.projetofinal.repositories.day.dto.DayResponseEntity;
+import br.com.xavero.projetofinal.repositories.day.entity.request.DayRequestEntity;
+import br.com.xavero.projetofinal.repositories.day.entity.response.DayResponseEntity;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
